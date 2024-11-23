@@ -10,7 +10,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-// application routes 
+// products routes 
 
 app.use('/', ProductsRoutes)
 app.get('/', ProductsRoutes);
@@ -23,7 +23,7 @@ app.get('/',OrderRouter)
 
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('hello world');
+  res.send('Server is running');
 });
 
 export default app;

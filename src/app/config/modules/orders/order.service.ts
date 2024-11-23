@@ -13,13 +13,11 @@ const getAllOrderRevenue = async () => {
   const result = await OrderModel.aggregate([
     {
       $group: {
-        _id: null, // Group all documents together
-        totalRevenue: { $sum: '$totalPrice' }, // Sum the totalPrice field
+        _id: null,
+        totalRevenue: { $sum: '$totalPrice' }, 
       },
     },
   ]);
-
-  // Return the revenue or 0 if there are no orders
   return result.length > 0 ? result[0].totalRevenue : 0;
 };
 
