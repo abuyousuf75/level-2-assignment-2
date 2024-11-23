@@ -13,13 +13,11 @@ app.use(cors());
 // products routes 
 
 app.use('/', ProductsRoutes)
-app.get('/', ProductsRoutes);
-app.put('/',ProductsRoutes);
-app.delete('/',ProductsRoutes);
+
 
 // order routes
 app.use('/',OrderRouter);
-app.get('/',OrderRouter)
+
 
 
 app.get('/', (req: Request, res: Response) => {

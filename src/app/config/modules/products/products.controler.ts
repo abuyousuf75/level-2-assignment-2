@@ -2,9 +2,6 @@
 import { Request, Response } from "express";
 import { ProductServices } from "./product.service";
 
-
-
-
 const createProduct = async(req : Request, res : Response) => {
    try {
      const { product: productData } = req.body;
@@ -52,21 +49,33 @@ const getASingleProduct = async (req: Request, res: Response) => {
 };
 
 const updateAProduct = async(req:Request, res: Response) => {
-  try{
-    const productId = req.params.productId;
-   
-    const doc = req.body;
-     console.log(productId, doc);
-    const result = await ProductServices.updateAProductFromDB(productId,doc);
-   res.status(201).json({
-     success: true,
-     message: 'Product updated successfully',
-     data: result,
-   });
-  }
+  try {
+    // const productId = req.params.productId;
+     const { productId } = req.params;
 
-  catch(err){
-    console.log(err)
+    const doc = req.body;
+    console.log(productId, doc);
+    const result = await ProductServices.updateAProductFromDB(productId,doc);
+
+    if(!result){
+       return res.status(404).json({
+         success: false,
+         message: 'Product not found',
+
+       });
+    }
+    res.status(201).json({
+      success: true,
+      message: 'Product updated successfully',
+      data: result,
+    });
+  } catch (err) {
+     const error = err as Error;
+      res.status(500).json({
+      success: false,
+      message: 'Failed to update product',
+      error: error.message,
+    });
   }
 }
 

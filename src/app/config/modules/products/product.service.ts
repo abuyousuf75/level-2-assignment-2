@@ -21,12 +21,11 @@ const getASingleProductFromDB = async (productId: string) => {
 
 const updateAProductFromDB = async (productId: string ,updatedDoc: IProducts ) => {
   const result = await ProductsModel.findByIdAndUpdate(
-    productId,
+     productId,
     {$set:updatedDoc},
-    {
-    new : true,
-  })
-  return result
+    {new : true}
+  );
+  return result;
 };
 
 const deleteAProductFromDB = async (productId: string) => {
