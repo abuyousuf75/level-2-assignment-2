@@ -37,5 +37,7 @@ const productsSchema = new Schema<IProducts>({
 });
 
 
+
+
 export const ProductsModel = model<IProducts>('Products', productsSchema)
 

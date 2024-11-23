@@ -1,7 +1,7 @@
 
 import { Request, Response } from "express";
 import { ProductServices } from "./product.service";
-import { ProductsModel } from "./products.mode";
+
 
 
 
@@ -51,10 +51,47 @@ const getASingleProduct = async (req: Request, res: Response) => {
      }
 };
 
+const updateAProduct = async(req:Request, res: Response) => {
+  try{
+    const productId = req.params.productId;
+   
+    const doc = req.body;
+     console.log(productId, doc);
+    const result = await ProductServices.updateAProductFromDB(productId,doc);
+
+   res.status(201).json({
+     success: true,
+     message: 'Product updated successfully',
+     data: result,
+   });
+  }
+
+  catch(err){
+    console.log(err)
+  }
+}
+
+
+const deleteAProduct = async(req: Request, res: Response) => {
+   try {
+     const productId = req.params.productId;
+      await ProductServices.deleteAProductFromDB(productId)
+
+     res.status(201).json({
+       success: true,
+       message: 'Product deleted successfully',
+       result:{},
+     });
+   } catch (err) {
+     console.log(err);
+   }
+};
 
 
 export const ProductControlers = {
   createProduct,
   getAllProduct,
   getASingleProduct,
+  updateAProduct,
+  deleteAProduct
 };
