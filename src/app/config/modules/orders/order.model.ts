@@ -30,9 +30,4 @@ const orderSchema = new Schema<IOrder>(
   },
 );
 
-
-// Add indexes for faster querying
-orderSchema.index({ email: 1 });
-orderSchema.index({ product: 1 });
-
 export const OrderModel = model<IOrder>('Order',orderSchema)

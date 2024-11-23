@@ -19,6 +19,7 @@ app.delete('/',ProductsRoutes);
 
 // order routes
 app.use('/',OrderRouter);
+app.get('/',OrderRouter)
 
 
 app.get('/', (req: Request, res: Response) => {
