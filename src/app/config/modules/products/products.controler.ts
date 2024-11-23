@@ -58,7 +58,6 @@ const updateAProduct = async(req:Request, res: Response) => {
     const doc = req.body;
      console.log(productId, doc);
     const result = await ProductServices.updateAProductFromDB(productId,doc);
-
    res.status(201).json({
      success: true,
      message: 'Product updated successfully',

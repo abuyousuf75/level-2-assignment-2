@@ -1,9 +1,9 @@
-import { ObjectId } from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 
 export type IOrder = {
   email: string;
-  product: ObjectId;
+  product:Types.ObjectId;
   quantity: number;
   totalPrice: number;
 };

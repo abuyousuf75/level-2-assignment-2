@@ -1,14 +1,38 @@
-import { Schema } from "mongoose";
-import { IOrder } from "./order.interface";
+import mongoose, { model, Schema } from 'mongoose';
+import { IOrder } from './order.interface';
 
 
-const orderSchema = new Schema<IOrder>({
-  email: { type: String, required: true },
-  product: {
-    type: Schema.Types.ObjectId,
-    ref: 'StationeryProduct',
-    required: true,
+const orderSchema = new Schema<IOrder>(
+  {
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      match: [/\S+@\S+\.\S+/, 'Invalid email address'], 
+    },
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+      required: [true, 'Product reference is required'],
+    },
+    quantity: {
+      type: Number,
+      required: [true, 'Quantity is required'],
+      min: [1, 'Quantity must be at least 1'],
+    },
+    totalPrice: {
+      type: Number,
+      required: [true, 'Total price is required'],
+      min: [0, 'Total price cannot be negative'],
+    },
   },
-  quantity: { type: Number, required: true, min: 1 },
-  totalPrice: { type: Number, required: true },
-});
+  {
+    timestamps: true, 
+  },
+);
+
+
+// Add indexes for faster querying
+orderSchema.index({ email: 1 });
+orderSchema.index({ product: 1 });
+
+export const OrderModel = model<IOrder>('Order',orderSchema)

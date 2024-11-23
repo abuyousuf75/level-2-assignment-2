@@ -2,6 +2,7 @@ import { Application, Request, Response } from 'express';
 import express from 'express';
 import cors from 'cors';
 import { ProductsRoutes } from './app/config/modules/products/products.router';
+import { OrderRouter } from './app/config/modules/orders/order.route';
 const app: Application = express();
 
 // parser
@@ -15,6 +16,9 @@ app.use('/', ProductsRoutes)
 app.get('/', ProductsRoutes);
 app.put('/',ProductsRoutes);
 app.delete('/',ProductsRoutes);
+
+// order routes
+app.use('/',OrderRouter);
 
 
 app.get('/', (req: Request, res: Response) => {
