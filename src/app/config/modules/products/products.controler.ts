@@ -4,8 +4,13 @@ import { ProductServices } from './product.service';
 // Create Product
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const { product: productData } = req.body;
-    const result = await ProductServices.createProductIntoDB(productData);
+    // const { product: productData } = req.body;
+    const {name,brand ,price,category,description,quantity,inStock } = req.body;
+   
+   
+    const result = await ProductServices.createProductIntoDB({
+      name,brand,price,category,description,quantity,inStock
+    });
 
     res.status(201).json({
       success: true,
@@ -76,7 +81,7 @@ const updateAProduct = async (req: Request, res: Response) => {
     }
 
     res.status(201).json({
-      success: true,
+      status: true,
       message: 'Product updated successfully',
       data: result,
     });
@@ -97,7 +102,7 @@ const deleteAProduct = async (req: Request, res: Response) => {
     await ProductServices.deleteAProductFromDB(productId);
 
     res.status(201).json({
-      success: true,
+      status: true,
       message: 'Product deleted successfully',
       result: {},
     });
