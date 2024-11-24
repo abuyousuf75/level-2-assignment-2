@@ -1,11 +1,12 @@
+
 import { IOrder } from "./order.interface";
 import { OrderModel } from "./order.model";
 
 
-const creatOrderIntoDB =async (order : IOrder) => {
-    const result = await OrderModel.create(order);
+const creatOrderIntoDB = async (order: IOrder) => {
+  const result = await OrderModel.create(order);
     return result
-}
+};
 
 // calculate the revinew from palced all odrers
 
